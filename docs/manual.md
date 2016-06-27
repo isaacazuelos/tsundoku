@@ -14,6 +14,8 @@ Some of the syntax for the usage might change too.
 idea is that you buy books you want to read and and leave them in a pile. This
 app helps keep your pile manageable.
 
+[wiki]: https://en.wikipedia.org/wiki/Tsundoku
+
 ## Table of Contents
 
 - [Warnings](#warnings)
@@ -21,36 +23,27 @@ app helps keep your pile manageable.
 - [Table of Contents](#table-of-contest)
 - [Examples](#examples)
 - [Common Issues](#common-issues)
-
-  - Fixing incorrect book details
-  - Authors with unusual names
-  - Books with multiple titles
-  - Books with the same titles
-  - Multiple versions of the same book
-
+    - Fixing incorrect book details
+    - Authors with unusual names
+    - Books with multiple titles
+    - Books with the same titles
+    - Multiple versions of the same book
 - [Verbs](#verbs)
-
-  - [Working with the app](#working-with-the-app)
-
-    - Get help with [`help`](#help)
-    - Create a new pile with [`init`](#init)
-    - Get path information with [`path`](#path)
-
-  - [Working with your pile](#working-with-your-pile)
-
-    - Browse your books with [`list`](#list)
-    - Add new books with [`add`](#add)
-    - Delete books with sadness and [`delete`](#delete)
-
-  - [Working with books](#Working-with-books)
-
-    - Find out more about a book with [`details`](#details)
-    - Mark a book you've started with [`start`](#start)
-    - Finish a book with [`finish`](#finish)
-    - Ditch crap books with [`abandon`](#abandon)
-    - Tag your books with [`tag`](#tag)
-    - Fix errors with [`fix`](#fix)
-
+    - [Working with the app](#working-with-the-app)
+        - Get help with [`help`](#help)
+        - Create a new pile with [`init`](#init)
+        - Get path information with [`path`](#path)
+    - [Working with your pile](#working-with-your-pile)
+        - Browse your books with [`list`](#list)
+        - Add new books with [`add`](#add)
+        - Delete books with sadness and [`delete`](#delete)
+    - [Working with books](#Working-with-books)
+        - Find out more about a book with [`details`](#details)
+        - Mark a book you've started with [`start`](#start)
+        - Finish a book with [`finish`](#finish)
+        - Ditch crap books with [`abandon`](#abandon)
+        - Tag your books with [`tag`](#tag)
+        - Fix errors with [`fix`](#fix)
 - [Thanks](#thanks)
 - [License](#license)
 
@@ -68,18 +61,17 @@ Don't fix it, just do a `details`, `delete` and `add`, fixing the error in the `
 
 ### Authors with atypical names
 
-Some authors have more than one last name, or more than one first name, like
-[David Foster Wallace][dfw]. Figuring out where to find
-[_Infinite Jest_][infjest] in a bookstore is hard enough for humans. This is
-why `tsundoku` asks for the last names and first names each. You can use
-quotes around the names to make sure they're parsed correctly.
+Some authors have more than one last name, or more than one first name.
+Figuring out where to find things in a bookstore is hard enough for humans.
+This is why `tsundoku` asks for the last names and first names each. You can
+use quotes around the names to make sure they're parsed correctly.
 
 For example, you might do something like the following:
 
-```
+``` sh
 $ tsundoku add "The Philosophy of Natural Magic" \
   --lastnames  "de Laurence" \
-  --firstnames "L. W."
+  --firstnames "L. W." \
   --published 1868
 ```
 
@@ -117,7 +109,7 @@ These verbs are for working with the `tsundoku` app itself.
 
 Usage
 
-```
+``` sh
 $ tsundoku --help
 $ tsundoku help
 ```
@@ -128,7 +120,7 @@ The `help` verb prints a fairly brief help message and a pile of verbs. It's pro
 
 Usage
 
-```
+``` sh
 $ tsundoku init [--reset]
 ```
 
@@ -140,11 +132,11 @@ If you set the `--reset` flag, it'll wipe your pile.
 
 Usage
 
-```
+``` sh
 $ tsundoku path
 ```
 
-The `path` verb prints the path of the current tsundoku directory. It prints nothing if there isn't one closer to root than the current directory.
+The `path` verb prints the path of the current Tsundoku directory. It prints nothing if there isn't one closer to root than the current directory.
 
 ### Working with your pile
 
@@ -152,7 +144,7 @@ The `path` verb prints the path of the current tsundoku directory. It prints not
 
 Usage
 
-```
+``` sh
 $ tsundoku pile \
   [-s|--sorted] \
   [-s|--status STATUS] \
@@ -166,7 +158,7 @@ By default, your pile is printed with the most recent books on top. You can set 
 
 You can limit the search to books of a particular read status by setting `--status` argument a value of `unread`, `finished` or `abandoned`. You can also just use the first letter.
 
-You an limit the search's format with `--format`. Like `--status` you must specify one of `ebook`, `autiobook` or `paper`. Again, you can use just the first character.
+You an limit the search's format with `--format`. Like `--status` you must specify one of `ebook`, `audiobook` or `paper`. Again, you can use just the first character.
 
 Where `TAG` is any tags to the results to. If you need to filter to multiple tags, try using [`grep`](https://www.gnu.org/software/grep/manual/grep.html)
 
@@ -176,7 +168,7 @@ There are two ways to use the `add` command. You can specify each necessary fiel
 
 Usage
 
-```
+``` sh
 $ tsundoku add TITLE\
   [-i|--interactive] \
   [-l|--lastnames LASTNAMEs] \
@@ -193,7 +185,7 @@ You can't add a book if there's already a book with that title. Yes, there are r
 
 Usage
 
-```
+``` sh
 $ tsundoku delete TITLE
 ```
 
@@ -205,7 +197,7 @@ Delete a book, removing it from your pile forever.
 
 Usage
 
-```
+``` sh
 $ tsundoku details TITLE
 ```
 
@@ -215,7 +207,7 @@ Shows you everything it known about a book in your pile. This shows not just inf
 
 Usage
 
-```
+``` sh
 $ tsundoku start TITLE [-d|--date DATE]
 ```
 
@@ -225,7 +217,7 @@ Mark books as started. By default the current date is recorded, but you can set 
 
 Usage
 
-```
+``` sh
 $ tsundoku finish TITLE [-d|--date DATE]
 ```
 
@@ -235,7 +227,7 @@ Mark books as finished. By default the current date is recorded, but you can set
 
 Usage
 
-```
+``` sh
 $ tsundoku abandon TITLE [-d|--date DATE] [-p|--page PAGE]
 ```
 
@@ -243,7 +235,7 @@ Mark books as abandoned. By default the current date is recorded, but you can se
 
 The `PAGE` given is stored verbatim, so the following will work.
 
-```
+``` sh
 $ tsundoku abandon "A very bad book" --page "Chapter 3"
 ```
 
@@ -251,7 +243,7 @@ $ tsundoku abandon "A very bad book" --page "Chapter 3"
 
 Usage:
 
-```
+``` sh
 $ tsundoku tag TITLE [-r|--remove] TAG
 ```
 
@@ -267,8 +259,4 @@ I'll thank any contributors here! That could be you!
 
 It's [MIT] Licensed. See the included `LICENSE` file in the project root.
 
-[dfw]: https://en.wikipedia.org/wiki/David_Foster_Wallace
-[infjest]: https://en.wikipedia.org/wiki/Infinite_Jest
-[mdlc]: https://en.wikipedia.org/wiki/Melissa_de_la_Cruz
 [mit]: https://opensource.org/licenses/MIT
-[wiki]: https://en.wikipedia.org/wiki/Tsundoku
