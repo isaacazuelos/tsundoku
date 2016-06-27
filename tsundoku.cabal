@@ -16,7 +16,10 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Tsundoku
+                     , Tsundoku.Book
   build-depends:       base >= 4.7 && < 5
+                     , text
+                     , time
   default-language:    Haskell2010
 
 executable tsundoku
@@ -27,7 +30,7 @@ executable tsundoku
                      , tsundoku
   default-language:    Haskell2010
 
-test-suite tsundoku-test
+test-suite tests
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
