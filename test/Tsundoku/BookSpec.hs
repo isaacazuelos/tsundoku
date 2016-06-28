@@ -1,8 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.BookSpec
-    ( spec )
-  where
+module Tsundoku.BookSpec ( spec ) where
 
 import           Test.Hspec
 

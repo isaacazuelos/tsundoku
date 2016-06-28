@@ -7,6 +7,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Tsundoku.Book
+    ( Book ( Book )
+    , firstName
+    , lastName
+    , otherAuthors
+    , title
+    , published
+    , status
+    , tags
+    , Status (Unread, Read, Abandoned)
+    , started
+    , finished
+    , abandoned
+    , place
+    , Tag
+    , Title
+    )
   where
 
 import qualified Data.Text          as Text
