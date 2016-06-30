@@ -4,6 +4,7 @@
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Tsundoku.Pile
@@ -16,9 +17,15 @@ module Tsundoku.Pile
   , PileError (NoSuchBookError, BookNotUniqueError)
   ) where
 
+import GHC.Generics (Generic)
+import Data.Aeson (FromJSON, ToJSON)
+
 import qualified Tsundoku.Book as Book
 
-data Pile = Pile [Book.Book] deriving (Show, Eq)
+data Pile = Pile [Book.Book] deriving (Show, Eq, Generic)
+
+instance FromJSON Pile
+instance ToJSON Pile
 
 data PileError
   = NoSuchBookError

@@ -4,6 +4,7 @@
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
+{-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Tsundoku.Book
@@ -29,6 +30,9 @@ import qualified Data.Text          as Text
 import qualified Data.Time.Calendar as Calendar
 import qualified Data.Time.Clock    as Clock
 
+import           Data.Aeson         (FromJSON, ToJSON)
+import           GHC.Generics       (Generic)
+
 data Book
   = Book
     { firstName    :: Text.Text
@@ -38,13 +42,16 @@ data Book
     , published    :: Maybe Calendar.Day
     , status       :: Status
     , tags         :: [Tag] }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 
 instance Ord Book where
   compare b1 b2 = compare b1comp b2comp
     where
       b1comp = (lastName b1, firstName b1, title b1)
       b2comp = (lastName b2, firstName b2, title b2)
+
+instance FromJSON Book
+instance ToJSON Book
 
 data Status
   = Unread
@@ -57,7 +64,10 @@ data Status
     { started   :: Maybe Calendar.Day
     , abandoned :: Maybe Calendar.Day
     , place     :: Maybe Text.Text }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
+
+instance FromJSON Status
+instance ToJSON Status
 
 type Tag = Text.Text
 
