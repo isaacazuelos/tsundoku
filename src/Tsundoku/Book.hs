@@ -8,19 +8,26 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Tsundoku.Book
-    ( Book ( Book )
-    , firstName
-    , lastName
-    , otherAuthors
-    , title
-    , published
-    , status
-    , tags
-    , Status (Unread, Read, Abandoned)
-    , started
-    , finished
-    , abandoned
-    , place
+    ( -- * Book metadata
+      Book
+      ( Book
+      , firstName
+      , lastName
+      , otherAuthors
+      , title
+      , published
+      , status
+      , tags )
+    -- * Reader status
+    , Status
+      ( Unread
+      , Read
+      , Abandoned
+      , started
+      , finished
+      , abandoned
+      , place )
+    -- * Type aliases
     , Tag
     , Title
     )
@@ -33,6 +40,7 @@ import qualified Data.Time.Clock    as Clock
 import           Data.Aeson         (FromJSON, ToJSON)
 import           GHC.Generics       (Generic)
 
+-- | Books are the core entry in our pile.
 data Book
   = Book
     { firstName    :: Text.Text
@@ -53,6 +61,9 @@ instance Ord Book where
 instance FromJSON Book
 instance ToJSON Book
 
+-- | A book's status tracks if the book has been read, or even attempted. The
+-- dates are optional, since tsundoku could still be used reasonably without
+-- tracking dates.
 data Status
   = Unread
   | Reading
@@ -69,6 +80,9 @@ data Status
 instance FromJSON Status
 instance ToJSON Status
 
+-- | Tags are just _any_ text. I didn't see a benefit to making them
+-- need to be lowercase, or not have whitespace, or whatever.
 type Tag = Text.Text
 
+-- | Books have titles, which are just text.
 type Title = Text.Text
