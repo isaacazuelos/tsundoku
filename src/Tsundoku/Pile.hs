@@ -7,7 +7,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Tsundoku.Pile
-  ( empty
+  ( Pile
+  , empty
   , add
   , delete
   , find
