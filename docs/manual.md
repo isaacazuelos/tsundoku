@@ -140,25 +140,22 @@ The `path` verb prints the path of the current Tsundoku directory. It prints not
 
 ### Working with your pile
 
-#### `pile`
+#### `list`
 
 Usage
 
 ``` sh
-$ tsundoku pile \
-  [-s|--sorted] \
+$ tsundoku list \
+  [-a|--alphabetical] \
   [-s|--status STATUS] \
-  [-f|--format FORMAT] \
   [-t|--tag TAG]
 ```
 
-Dumps out a nice, human-readable pile of all books. There are flags you can set to limit the output in various ways.
+Dumps out a nice, human-readable list of all books. There are flags you can set to limit the output in various ways.
 
-By default, your pile is printed with the most recent books on top. You can set the `--sorted` flag to have it sort the books in the usual way, i.e. by author last name, first name, then title.
+By default, your pile is printed with the most recent books on top. You can set the `--alphabetical` flag to have it sort the books in the usual way, i.e. by author last name, first name, then title.
 
 You can limit the search to books of a particular read status by setting `--status` argument a value of `unread`, `finished` or `abandoned`. You can also just use the first letter.
-
-You an limit the search's format with `--format`. Like `--status` you must specify one of `ebook`, `audiobook` or `paper`. Again, you can use just the first character.
 
 Where `TAG` is any tags to the results to. If you need to filter to multiple tags, try using [`grep`](https://www.gnu.org/software/grep/manual/grep.html)
 
