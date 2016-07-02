@@ -10,6 +10,7 @@ import           System.Exit
 import           Tsundoku.IO         (pilePath, writePile)
 import qualified Tsundoku.Verb       as Verb
 import qualified Tsundoku.Verb.Init  as Init (verb)
+import qualified Tsundoku.Verb.List  as List (verb)
 
 main :: IO ()
 main = do result <- join $ execParser (info commands idm)
@@ -23,4 +24,7 @@ main = do result <- join $ execParser (info commands idm)
               forM_ message putStrLn
               exitSuccess
 
-commands = helper <*> subparser (mconcat [ Verb.command Init.verb ])
+commands = helper <*> subparser (mconcat
+  [ Verb.command Init.verb
+  , Verb.command List.verb
+  ])
