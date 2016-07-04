@@ -10,6 +10,8 @@ import           System.Exit
 import           Tsundoku.IO         (pilePath, writePile)
 
 import qualified Tsundoku.Verb       as Verb
+
+
 import qualified Tsundoku.Verb.Add   as Add (verb)
 import qualified Tsundoku.Verb.Init  as Init (verb)
 import qualified Tsundoku.Verb.List  as List (verb)
