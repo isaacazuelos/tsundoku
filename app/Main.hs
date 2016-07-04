@@ -16,6 +16,7 @@ import qualified Tsundoku.Verb.Add    as Add (verb)
 import qualified Tsundoku.Verb.Init   as Init (verb)
 import qualified Tsundoku.Verb.List   as List (verb)
 import qualified Tsundoku.Verb.Remove as Remove (verb)
+import qualified Tsundoku.Verb.Path as Path (verb)
 
 main :: IO ()
 main = do result <- join $ execParser (info commands idm)
@@ -34,4 +35,5 @@ commands = helper <*> subparser (mconcat
   , Verb.command Init.verb
   , Verb.command Remove.verb
   , Verb.command List.verb
+  , Verb.command Path.verb
   ])

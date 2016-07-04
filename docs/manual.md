@@ -136,7 +136,7 @@ Usage
 $ tsundoku path
 ```
 
-The `path` verb prints the path of the current Tsundoku directory. It prints nothing if there isn't one closer to root than the current directory.
+The `path` verb prints the absolute path of the current Tsundoku file.
 
 ### Working with your pile
 
