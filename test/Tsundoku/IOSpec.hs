@@ -31,9 +31,9 @@ import           Tsundoku.IO
 testBook :: Book
 testBook =
   Book
-    { firstName = "Kurt"
-    , lastName = "Vonnegut"
-    , otherAuthors = ""
+    { firstName = Just "Kurt"
+    , lastName = Just "Vonnegut"
+    , otherAuthors = Nothing
     , title = "Slaughterhouse Five"
     , published = Nothing
     , status = Read { started = Nothing, finished = Nothing }

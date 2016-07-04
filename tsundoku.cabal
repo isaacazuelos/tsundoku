@@ -21,6 +21,7 @@ library
                      , Tsundoku.Verb
                      , Tsundoku.Verb.Init
                      , Tsundoku.Verb.List
+                     , Tsundoku.Verb.Add
   build-depends:       base >= 4.7 && < 5
                      , text
                      , time

@@ -12,9 +12,9 @@ import qualified Tsundoku.Pile as Pile
 testBook1 :: Book
 testBook1 =
   Book
-    { firstName    = "Kurt"
-    , lastName     = "Vonnegut"
-    , otherAuthors = ""
+    { firstName    = Just "Kurt"
+    , lastName     = Just "Vonnegut"
+    , otherAuthors = Nothing
     , title        = "Slaughterhouse Five"
     , published    = Nothing
     , status       = Read { started = Nothing , finished = Nothing }
@@ -24,9 +24,9 @@ testBook1 =
 testBook2 :: Book
 testBook2 =
   Book
-    { firstName    = "Lois"
-    , lastName     = "Lane"
-    , otherAuthors = "Kent Clark, Superman"
+    { firstName    = Just "Lois"
+    , lastName     = Just "Lane"
+    , otherAuthors = Just "Kent Clark, Superman"
     , title        = "Why the World Doesn't Need Superman"
     , published    = Nothing
     , status       = Unread

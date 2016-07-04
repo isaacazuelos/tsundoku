@@ -8,7 +8,9 @@ import           Options.Applicative
 import           System.Exit
 
 import           Tsundoku.IO         (pilePath, writePile)
+
 import qualified Tsundoku.Verb       as Verb
+import qualified Tsundoku.Verb.Add   as Add (verb)
 import qualified Tsundoku.Verb.Init  as Init (verb)
 import qualified Tsundoku.Verb.List  as List (verb)
 
@@ -25,6 +27,7 @@ main = do result <- join $ execParser (info commands idm)
               exitSuccess
 
 commands = helper <*> subparser (mconcat
-  [ Verb.command Init.verb
+  [ Verb.command Add.verb
+  , Verb.command Init.verb
   , Verb.command List.verb
   ])
