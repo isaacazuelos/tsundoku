@@ -22,6 +22,7 @@ module Tsundoku.Book
     , Status
       ( Unread
       , Read
+      , Started
       , Abandoned
       , started
       , finished
@@ -30,6 +31,7 @@ module Tsundoku.Book
     -- * Type aliases
     , Tag
     , Title
+    , Year
     )
   where
 
@@ -43,11 +45,11 @@ import           GHC.Generics       (Generic)
 -- | Books are the core entry in our pile.
 data Book
   = Book
-    { firstName    :: Text.Text
-    , lastName     :: Text.Text
-    , otherAuthors :: Text.Text
+    { firstName    :: Maybe Text.Text
+    , lastName     :: Maybe Text.Text
+    , otherAuthors :: Maybe Text.Text
     , title        :: Title
-    , published    :: Maybe Calendar.Day
+    , published    :: Maybe Year
     , status       :: Status
     , tags         :: [Tag] }
   deriving (Show, Eq, Generic)
@@ -66,7 +68,7 @@ instance ToJSON Book
 -- tracking dates.
 data Status
   = Unread
-  | Reading
+  | Started
     { started :: Maybe Calendar.Day }
   | Read
     { started  :: Maybe Calendar.Day
@@ -86,3 +88,6 @@ type Tag = Text.Text
 
 -- | Books have titles, which are just text.
 type Title = Text.Text
+
+-- | A year is just an integer, since I'm way to lazy.
+type Year = Integer

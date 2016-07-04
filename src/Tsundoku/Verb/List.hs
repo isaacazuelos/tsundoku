@@ -74,7 +74,7 @@ listAction options = do
       mapM_ (putStrLn . pretty) sortedBooks
       return Success { message = Nothing, updated = Nothing}
 
-sortables :: Book.Book -> (Text.Text, Text.Text, Book.Title)
+sortables :: Book.Book -> (Maybe Text.Text, Maybe Text.Text, Book.Title)
 sortables book = (Book.lastName book, Book.firstName book, Book.title book)
 
 hasTag :: Book.Book -> Maybe Book.Tag -> Bool
