@@ -36,7 +36,7 @@ app helps keep your pile manageable.
     - [Working with your pile](#working-with-your-pile)
         - Browse your books with [`list`](#list)
         - Add new books with [`add`](#add)
-        - Delete books with sadness and [`delete`](#delete)
+        - Remove books with sadness and [`remove`](#delete)
     - [Working with books](#Working-with-books)
         - Find out more about a book with [`details`](#details)
         - Mark a book you've started with [`start`](#start)
@@ -178,7 +178,7 @@ Books are added as unread and without tags. If that's incorrect, you can fix boo
 
 You can't add a book if there's already a book with that title. Yes, there are real pairs of books that share titles. Trust me, things are simpler if you just pick one.
 
-#### `delete`
+#### `remove`
 
 Usage
 
@@ -186,7 +186,7 @@ Usage
 $ tsundoku delete TITLE
 ```
 
-Delete a book, removing it from your pile forever.
+Remove a book from your pile forever.
 
 ### Working with books
 
