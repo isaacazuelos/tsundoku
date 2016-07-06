@@ -198,7 +198,7 @@ Usage
 $ tsundoku details TITLE
 ```
 
-Shows you everything it known about a book in your pile. This shows not just information you've added about the book, but also where you are in reading it.
+Shows you everything known about a book in your pile.
 
 #### `start`
 

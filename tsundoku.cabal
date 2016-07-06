@@ -24,6 +24,7 @@ library
                      , Tsundoku.Verb.Add
                      , Tsundoku.Verb.Path
                      , Tsundoku.Verb.Remove
+                     , Tsundoku.Verb.Tag
   build-depends:       base >= 4.7 && < 5
                      , text
                      , time
