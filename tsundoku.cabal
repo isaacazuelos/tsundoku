@@ -18,6 +18,7 @@ library
   exposed-modules:     Tsundoku.Book
                      , Tsundoku.IO
                      , Tsundoku.Pile
+                     , Tsundoku.Pretty
                      , Tsundoku.Verb
                      , Tsundoku.Verb.Init
                      , Tsundoku.Verb.List
@@ -25,6 +26,7 @@ library
                      , Tsundoku.Verb.Path
                      , Tsundoku.Verb.Remove
                      , Tsundoku.Verb.Tag
+                     , Tsundoku.Verb.Details
   build-depends:       base >= 4.7 && < 5
                      , text
                      , time

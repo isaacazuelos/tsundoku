@@ -21,7 +21,7 @@ module Tsundoku.Book
     -- * Reader status
     , Status
       ( Unread
-      , Read
+      , Finished
       , Started
       , Abandoned
       , started
@@ -70,7 +70,7 @@ data Status
   = Unread
   | Started
     { started :: Maybe Calendar.Day }
-  | Read
+  | Finished
     { started  :: Maybe Calendar.Day
     , finished :: Maybe Calendar.Day }
   | Abandoned
