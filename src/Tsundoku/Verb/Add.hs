@@ -52,10 +52,10 @@ addParser = AddOptions
     (metavar "title"
     <> help "The book's unique title")
   <*> optional (option (Text.pack <$> str)
-      (metavar "firstname"
-        <> long "firstname"
-        <> short 'f'
-        <> help "The author's first name"))
+    (metavar "firstname"
+    <> long "firstname"
+    <> short 'f'
+    <> help "The author's first name"))
   <*> optional (option (Text.pack <$> str)
     (metavar "lastname"
     <> long "lastname"

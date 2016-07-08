@@ -11,7 +11,6 @@ import           Tsundoku.IO           (pilePath, writePile)
 
 import qualified Tsundoku.Verb         as Verb
 
-
 import qualified Tsundoku.Verb.Add     as Add (verb)
 import qualified Tsundoku.Verb.Details as Details (verb)
 import qualified Tsundoku.Verb.Init    as Init (verb)
@@ -19,6 +18,7 @@ import qualified Tsundoku.Verb.List    as List (verb)
 import qualified Tsundoku.Verb.Path    as Path (verb)
 import qualified Tsundoku.Verb.Remove  as Remove (verb)
 import qualified Tsundoku.Verb.Tag     as Tag (verb)
+import qualified Tsundoku.Verb.Status  as Status (start, finish, abandon, unread)
 
 main :: IO ()
 main = do result <- join $ execParser (info commands idm)
@@ -40,4 +40,8 @@ commands = helper <*> subparser (mconcat
   , Verb.command Path.verb
   , Verb.command Tag.verb
   , Verb.command Details.verb
+  , Verb.command Status.start
+  , Verb.command Status.finish
+  , Verb.command Status.abandon
+  , Verb.command Status.unread
   ])

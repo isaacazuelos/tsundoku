@@ -27,12 +27,14 @@ library
                      , Tsundoku.Verb.Remove
                      , Tsundoku.Verb.Tag
                      , Tsundoku.Verb.Details
+                     , Tsundoku.Verb.Status
   build-depends:       base >= 4.7 && < 5
                      , text
                      , time
                      , aeson
                      , bytestring
                      , directory
+                     , semigroups
                      , filepath
                      , optparse-applicative
   default-language:    Haskell2010

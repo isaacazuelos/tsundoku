@@ -17,7 +17,7 @@ testBook1 =
     , otherAuthors = Nothing
     , title        = "Slaughterhouse Five"
     , published    = Nothing
-    , status       = Read { started = Nothing , finished = Nothing }
+    , status       = Finished { started = Nothing , finished = Nothing }
     , tags         = []
     }
 
