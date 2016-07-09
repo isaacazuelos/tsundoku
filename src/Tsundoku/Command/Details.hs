@@ -1,28 +1,28 @@
 -- |
--- Module      : Tsundoku.Verb.Details
+-- Module      : Tsundoku.Command.Details
 -- Description : Show a book's full details
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Details (verb) where
+module Tsundoku.Command.Details (command) where
 
 import qualified Data.Text           as Text
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
+import           Tsundoku.Command
 import           Tsundoku.IO
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
 import           Tsundoku.Pretty
 
--- | The init verb.
-verb =
-  Verb
+-- | The details command prints a single book's details.
+command =
+  Command
     { name         = "details"
-    , header       = "tsundoku details - show a book's full details"
-    , description  = "print everything known about a book from the pile"
+    , header       = "tsundoku details - print a book's details"
+    , description  = "Print everything known about a book from the pile."
     , optionParser = optionsParser
     , action       = details
     }
@@ -34,8 +34,8 @@ data Options = Options { title :: Text.Text } deriving (Show, Eq)
 optionsParser :: Parser Options
 optionsParser = Options
   <$> argument (Text.pack <$> str)
-    (metavar "title"
-    <> help "The book's title")
+    (metavar "TITLE"
+    <> help "the book's title")
 
 -- | The entry point into our action, taking the options.
 details :: Options -> IO Result
@@ -43,6 +43,6 @@ details (Options title) = do
   path <- pilePath
   pile <- readPile path
   case Pile.find title pile of
-    Left Pile.NoSuchBookError -> failWith "cannot find book to remove"
+    Left Pile.NoSuchBookError -> failWith "could not find the book to remove"
     Left err -> failWith $ "unexpected error: " <> Text.pack (show err)
     Right book -> succeedWith (pretty True book)

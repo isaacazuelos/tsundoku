@@ -1,27 +1,27 @@
 -- |
--- Module      : Verb.Init
--- Description : The verb that sets up piles.
+-- Module      : Tsundoku.Command.Init
+-- Description : The command to create a new pile.
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Init (verb) where
+module Tsundoku.Command.Init (command) where
 
 import qualified Data.Text           as Text
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
+import           Tsundoku.Command
 import           Tsundoku.IO
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
 
--- | The init verb.
-verb =
-  Verb
+-- | The init command sets up piles.
+command =
+  Command
     { name         = "init"
-    , header       = "tsundoku init - initialize your pile"
-    , description  = "create a new empty pile"
+    , header       = "tsundoku init - initialize a pile"
+    , description  = "Create a new and empty pile."
     , optionParser = initOptionParser
     , action       = initAction
     }
@@ -40,7 +40,9 @@ initAction (InitOptions shouldReset) = do
   path <- pilePath
   pileExists <- doesFileExist path
   case (pileExists, shouldReset) of
-    (False, False) -> writePile path Pile.empty >> succeedWith "pile created"
-    (True,  False) -> failWith "pile already exists"
-    (False, True)  -> writePile path Pile.empty >> succeedWith "no pile to reset, pile created"
-    (True, True)   -> writePile path Pile.empty >> succeedWith "pile reset"
+    (False, False) -> writePile path Pile.empty >> return (Success Nothing Nothing)
+    (True,  False) -> failWith "a pile already exists"
+    (True, True)   -> writePile path Pile.empty >> succeedWith "the pile was reset"
+    (False, True)  -> do
+      writePile path Pile.empty
+      succeedWith "there's no pile to reset, so a new one was made"

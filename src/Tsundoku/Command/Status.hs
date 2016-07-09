@@ -6,7 +6,7 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Status ( start, finish, abandon, unread ) where
+module Tsundoku.Command.Status ( start, finish, abandon, unread ) where
 
 import qualified Data.Char           as Char (isDigit)
 import           Data.Maybe          (fromMaybe, isJust)
@@ -14,13 +14,13 @@ import qualified Data.Semigroup      as Semi
 import qualified Data.Text           as Text
 import           Data.Time.Calendar  as Calendar
 import qualified Data.Time.LocalTime as Time
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, header, command)
 import           System.Directory
 
 import qualified Tsundoku.Book       as Book
 import           Tsundoku.IO
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
+import           Tsundoku.Command
 
 readDate :: String -> ReadM Calendar.Day
 readDate date@[y1, y2, y3, y4, '-', m1, m2, '-', d1, d2] = do
@@ -55,12 +55,12 @@ statusAction pureAction options = do
 (<!>) Nothing  b = b
 
 
-start :: Verb StartOptions
+start :: Command StartOptions
 start =
-  Verb
+  Command
     { name         = "start"
     , header       = "tsundoku start - mark a book as started"
-    , description  = "start reading a book"
+    , description  = "Mark a book as started."
     , optionParser = startParser
     , action       = startAction
     }
@@ -72,7 +72,7 @@ data StartOptions
 startParser :: Parser StartOptions
 startParser = StartOptions
   <$> argument (Text.pack <$> str)
-    (metavar "title"
+    (metavar "TITLE"
     <> help "The title of the book")
   <*> optional (option (str >>= readDate)
     (long "started"
@@ -90,12 +90,12 @@ startPure (StartOptions title started) pile today = do
   pileWithout <- Pile.delete title pile
   Pile.add book' pileWithout
 
-finish :: Verb FinishOptions
+finish :: Command FinishOptions
 finish =
-  Verb
+  Command
     { name         = "finish"
     , header       = "tsundoku finish - mark a book as finished"
-    , description  = "finish a book"
+    , description  = "Mark that you've finished a book."
     , optionParser = finishParser
     , action       = finishAction
     }
@@ -106,7 +106,7 @@ data FinishOptions =
 finishParser :: Parser FinishOptions
 finishParser = Fin
   <$> argument (Text.pack <$> str)
-    (metavar "title"
+    (metavar "TITLE"
     <> help "The title of the book")
   <*> optional (option (str >>= readDate)
     (long "started"
@@ -132,12 +132,12 @@ pureFinish (Fin title started finished) pile today = do
   pileWithout <- Pile.delete title pile
   Pile.add book' pileWithout
 
-abandon :: Verb AbandonOptions
+abandon :: Command AbandonOptions
 abandon =
-  Verb
+  Command
     { name         = "abandon"
     , header       = "tsundoku abandon - give up"
-    , description  = "Abandon crap books early."
+    , description  = "Abandon books that aren't worth finishing."
     , optionParser = abandonParser
     , action       = abandonAction
     }
@@ -164,7 +164,7 @@ abandonParser = AbandonOptions
   <*> optional (option (Text.pack <$> str)
     (long "place"
     <> short 'p'
-    <> help "a reminder of where you gave up"
+    <> help "a reminder of where you stopped"
     <> metavar "PLACE"))
 
 abandonAction :: AbandonOptions -> IO Result
@@ -182,11 +182,11 @@ abandonPure (AbandonOptions title started abandoned place) pile today = do
   pileWithout <- Pile.delete title pile
   Pile.add book' pileWithout
 
-unread :: Verb UnreadOptions
-unread = Verb
+unread :: Command UnreadOptions
+unread = Command
   { name         = "unread"
   , header       = "tsundoku unread - unread a book"
-  , description  = "mark a book as unread"
+  , description  = "Mark a book as unread."
   , optionParser = unreadParser
   , action       = unreadAction
   }

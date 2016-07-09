@@ -1,12 +1,12 @@
 -- |
--- Module      : Verb.List
+-- Module      : Tsundoku.Command.List
 -- Description : The verb that lists your books.
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.List (verb) where
+module Tsundoku.Command.List (command) where
 
 import           Prelude             hiding (show)
 import qualified Prelude             (show)
@@ -15,7 +15,7 @@ import           Data.List           (intercalate, sortBy)
 import           Data.Ord            (comparing)
 import qualified Data.Text           as Text
 import qualified Data.Time.Calendar  as Calendar
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, header, command)
 import           System.Directory
 
 
@@ -23,14 +23,14 @@ import qualified Tsundoku.Book       as Book
 import           Tsundoku.IO
 import           Tsundoku.Pretty
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
+import           Tsundoku.Command
 
--- | The init verb.
-verb =
-  Verb
+-- | The list command lists the books in the pile.
+command =
+  Command
     { name         = "list"
     , header       = "tsundoku list - list your books"
-    , description  = "list the books in your pile"
+    , description  = "List the books in your pile."
     , optionParser = listOptionParser
     , action       = listAction }
 
@@ -57,12 +57,12 @@ listOptionParser = Options
     <> long "alltags"
     <> help "show all tags for every book")
   <*> optional (option (str >>= statusize)
-    (metavar "status"
+    (metavar "STATUS"
     <> long "status"
     <> short 's'
     <> help "filter by status"))
   <*> optional (option (Text.pack <$> str)
-    (metavar "tag"
+    (metavar "TAG"
     <> long "tag"
     <> short 't'
     <> help "limit results to tag"))
@@ -77,9 +77,7 @@ statusize "started"   = return Started
 statusize "u"         = return Unread
 statusize "unread"    = return Unread
 statusize str         = readerError
-  $  "invalid status: '"
-  <> str
-  <> "', use one of 'read', 'unread', 'abandoned'."
+  $  "'" <> str <> "' is an invalid status, use one of 'read', 'unread', or 'abandoned'"
 
 -- | The entry point into our action, taking the options.
 listAction :: Options -> IO Result

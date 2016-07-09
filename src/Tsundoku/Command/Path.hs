@@ -1,24 +1,24 @@
 -- |
--- Module      : Verb.Path
+-- Module      : Tsundoku.Command.Path
 -- Description : A path verb prints the current pile's path.
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Path (verb) where
+module Tsundoku.Command.Path (command) where
 
 import qualified Data.Text           as Text
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
+import           Tsundoku.Command
 import           Tsundoku.IO
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
 
--- | The init verb.
-verb =
-  Verb
+-- | The path command prints the path of the pile.
+command =
+  Command
     { name         = "path"
     , header       = "tsundoku path - print the pile's path"
     , description  = "the pile's path"

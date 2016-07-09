@@ -6,23 +6,23 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Tag (verb) where
+module Tsundoku.Command.Tag (command) where
 
 import qualified Data.Text           as Text
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
 import qualified Tsundoku.Book       as Book
 import           Tsundoku.IO
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
+import           Tsundoku.Command
 
--- | The init verb.
-verb =
-  Verb
+-- | The tag command lets you modify tags.
+command =
+  Command
     { name         = "tag"
     , header       = "tsundoku tag - manage tags"
-    , description  = "manage tags"
+    , description  = "Manage a book's tags."
     , optionParser = optionsParser
     , action       = initAction
     }
@@ -40,14 +40,14 @@ data Options
 optionsParser :: Parser Options
 optionsParser = Options
   <$> argument (Text.pack <$> str)
-    (metavar "title"
+    (metavar "TITLE"
     <> help "The book's title")
   <*> switch
     (long "remove"
     <> short 'r'
     <> help "remove the tag")
   <*> argument (Text.pack <$> str)
-    (metavar "tag"
+    (metavar "TAG"
     <> help "the tag to add or remove")
 
 -- | The entry point into our action, taking the options.
@@ -55,7 +55,7 @@ initAction :: Options -> IO Result
 initAction (Options title remove tag) = do
   pile <- pilePath >>= readPile
   case Pile.find title pile of
-    Left Pile.NoSuchBookError -> failWith "No book found with that title."
+    Left Pile.NoSuchBookError -> failWith "no book found with that title"
     Left err -> failWith . Text.pack $ "unexpected error: " ++ show err
     Right book -> do
       let book' = (if remove then removeTag else addTag) book tag

@@ -1,34 +1,34 @@
 -- |
--- Module      : Verb.Add
+-- Module      : Tsundoku.Command.Add
 -- Description : The verb that adds books
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Add (verb) where
+module Tsundoku.Command.Add ( command ) where
 
 import           Prelude             hiding (last)
 
-import           Options.Applicative hiding (Success, action, header)
+import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
 import qualified Data.Char           as Char (isDigit)
 import qualified Data.Text           as Text
 import qualified Data.Time.Calendar  as Calendar
 
+import           Tsundoku.Command
 import           Tsundoku.IO
-import           Tsundoku.Verb
 
 import qualified Tsundoku.Book       as Book
 import qualified Tsundoku.Pile       as Pile
 
--- | The init verb.
-verb =
-  Verb
+-- | The add command adds books to the pile.
+command =
+  Command
     { name         = "add"
     , header       = "tsundoku add - add books to your pile"
-    , description  = "add a book to your pile"
+    , description  = "Add a book to the top of your pile."
     , optionParser = addParser
     , action       = add
     }
@@ -49,33 +49,33 @@ data AddOptions
 addParser :: Parser AddOptions
 addParser = AddOptions
   <$> argument (Text.pack <$> str)
-    (metavar "title"
-    <> help "The book's unique title")
+    (metavar "TITLE"
+    <> help "the book's unique title")
   <*> optional (option (Text.pack <$> str)
-    (metavar "firstname"
+    (metavar "NAME"
     <> long "firstname"
     <> short 'f'
-    <> help "The author's first name"))
+    <> help "the author's first name"))
   <*> optional (option (Text.pack <$> str)
-    (metavar "lastname"
+    (metavar "NAME"
     <> long "lastname"
     <> short 'l'
-    <> help "The author's last name"))
+    <> help "the author's last name"))
   <*> optional (option (Text.pack <$> str)
-    (metavar "otherauthors"
+    (metavar "NAMES"
     <> long "otherauthors"
     <> short 'o'
-    <> help "Other author names"))
+    <> help "the names of other authors"))
   <*> optional (option (str >>= yearParser)
-    (metavar "year"
+    (metavar "YYYY"
     <> long "published"
     <> short 'p'
-    <> help "The year the book was published"))
+    <> help "the year the book was published"))
   <*> many (option (Text.pack <$> str)
-    (metavar "tag"
+    (metavar "TAG"
     <> short 't'
     <> long "tag"
-    <> help "Add tags to the book"))
+    <> help "add tags to the book"))
 
 -- | Parse a year, i.e. make sure all the characters are digits.
 yearParser :: String -> ReadM Book.Year
