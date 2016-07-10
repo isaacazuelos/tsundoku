@@ -149,8 +149,8 @@ pureFinish (Fin title started finished) pile today = do
       case status of
         Book.Unread -> Book.Finished (Nothing <!> started) (t <!> finished)
         Book.Started s -> Book.Finished (s <!> started) (t <!> finished)
-        Book.Finished s f -> Book.Finished (s <!> started) (f <|> t <!> finished)
-        Book.Abandoned s a p -> Book.Finished (s <!> started) (a <|> t <!> finished)
+        Book.Finished s f -> Book.Finished (s <!> started) ((f <|> t) <!> finished)
+        Book.Abandoned s a p -> Book.Finished (s <!> started) ((a <|> t) <!> finished)
 
 abandon :: Command AbandonOptions
 abandon =
@@ -202,9 +202,9 @@ abandonPure (AbandonOptions title started abandoned place) pile today = do
                   Book.Started s ->
                     Book.Abandoned (s <!> started) (t <!> abandoned ) place
                   Book.Finished s f ->
-                    Book.Abandoned (s <!> started) (f <|> t <!> abandoned) place
+                    Book.Abandoned (s <!> started) ((f <|> t) <!> abandoned) place
                   Book.Abandoned s a p ->
-                    Book.Abandoned (s <!> started) (a <|> t <!> abandoned) (place <|> p)
+                    Book.Abandoned (s <!> started) ((a <|> t) <!> abandoned) (place <|> p)
   let book'   = book { Book.status = status' }
   pileWithout <- delete title pile
   add book' pileWithout
