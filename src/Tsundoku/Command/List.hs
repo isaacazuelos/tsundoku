@@ -43,15 +43,15 @@ data Options
     , tag                :: Maybe Book.Tag }
   deriving (Show, Eq)
 
-data Status = Unread | Started | Read | Abandoned deriving (Show, Eq)
+data Status = Unread | Started | Finished | Abandoned deriving (Show, Eq)
 
 -- | An applicative parser for our options.
 listOptionParser :: Parser Options
 listOptionParser = Options
   <$> switch
-    (short 's'
+    (short 'l'
     <> long "sort"
-    <> help "sort alphabetically")
+    <> help "sort by lastname, firstname, title")
   <*> switch
     (short 'a'
     <> long "alltags"
@@ -70,14 +70,17 @@ listOptionParser = Options
 statusize :: String -> ReadM Status
 statusize "a"         = return Abandoned
 statusize "abandoned" = return Abandoned
-statusize "r"         = return Read
-statusize "read"      = return Read
+statusize "f"         = return Finished
+statusize "finished"  = return Finished
 statusize "s"         = return Started
 statusize "started"   = return Started
 statusize "u"         = return Unread
 statusize "unread"    = return Unread
-statusize str         = readerError
-  $  "'" <> str <> "' is an invalid status, use one of 'read', 'unread', or 'abandoned'"
+statusize str         = readerError $
+  "'"
+   <> str
+   <> "' is an invalid status, use one of "
+   <> "'unread', 'started', 'finihsed', or 'abandoned'"
 
 -- | The entry point into our action, taking the options.
 listAction :: Options -> IO Result
@@ -85,7 +88,7 @@ listAction options = do
   path <- pilePath
   pile <- readPile path
   if pile == Pile.empty
-    then succeedWith "Your pile is empty. :("
+    then succeedWith "your pile is empty"
     else do
       let allBooks = Pile.list pile
       let taggedBooks = filter (`hasTag` tag options) allBooks
@@ -105,7 +108,7 @@ hasTag book (Just tag) = tag `elem` Book.tags book
 
 hasStatus :: Book.Book -> Maybe Status -> Bool
 hasStatus _ Nothing = True
-hasStatus Book.Book {Book.status = Book.Finished {}} (Just Read) = True
+hasStatus Book.Book {Book.status = Book.Finished {}} (Just Finished) = True
 hasStatus Book.Book {Book.status = Book.Abandoned {}} (Just Abandoned) = True
 hasStatus Book.Book {Book.status = Book.Unread {}} (Just Unread) = True
 hasStatus _ _ = False
