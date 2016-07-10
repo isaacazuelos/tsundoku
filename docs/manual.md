@@ -201,7 +201,9 @@ Remove a book from your pile forever.
 
 #### A note about dates
 
-When a date needs to be specified, use the `yyyy-mm-dd` date format.
+When a date needs to be specified, use the `yyyy-mm-dd` date format. If you
+want to specifically not use a date, say if you're trying to remove an
+incorrect date, you can use `none` as the date as well.
 
 #### `details`
 
