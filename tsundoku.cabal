@@ -1,5 +1,5 @@
 name:                tsundoku
-version:             0.0.0.0
+version:             0.1.0.0
 synopsis:            Tsundoku tracks your piles of unread books.
 description:         Please see README.md
 homepage:            https://github.com/isaacazuelos/tsundoku#readme
@@ -29,14 +29,14 @@ library
                      , Tsundoku.Command.Details
                      , Tsundoku.Command.Status
   build-depends:       base >= 4.7 && < 5
-                     , text
-                     , time
-                     , aeson
-                     , bytestring
-                     , directory
-                     , semigroups
-                     , filepath
-                     , optparse-applicative
+                     , text >= 1.2 && < 2
+                     , time >= 1.5 && < 2
+                     , aeson >= 0.11 && <= 0.12
+                     , bytestring >= 0.10 && <= 1
+                     , directory >= 1.2 && <= 2
+                     , semigroups >= 0.18 && <= 2
+                     , filepath >= 1.4 && <= 2
+                     , optparse-applicative >= 0.12 && <= 1
   default-language:    Haskell2010
 
 executable doku
@@ -45,8 +45,8 @@ executable doku
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , tsundoku
-                     , optparse-applicative
-                     , text
+                     , optparse-applicative >= 0.12 && <= 1
+                     , text >= 1.2 && < 2
   default-language:    Haskell2010
 
 test-suite tests
