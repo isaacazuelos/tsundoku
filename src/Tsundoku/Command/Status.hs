@@ -181,7 +181,7 @@ abandonParser = AbandonOptions
     (long "finished"
     <> short 'f'
     <> value Unspecified
-    <> help "the date you finished the book"
+    <> help "the date you put the book down"
     <> metavar "DATE")
   <*> optional (option (Text.pack <$> str)
     (long "place"

@@ -22,7 +22,7 @@ import qualified Tsundoku.Command.Status  as Status (abandon, finish, start,
 import qualified Tsundoku.Command.Tag     as Tag (command)
 
 main :: IO ()
-main = do result <- join $ execParser (info commands idm)
+main = do result <- join $ execParser rootCommand
           case result of
             Command.Failure err -> putStrLn err >> exitFailure
             Command.Success Nothing Nothing -> exitSuccess
@@ -33,7 +33,13 @@ main = do result <- join $ execParser (info commands idm)
               forM_ message putStrLn
               exitSuccess
 
-commands = helper <*> subparser (mconcat
+rootCommand :: ParserInfo (IO Command.Result)
+rootCommand = info (helper <*> subcommands)
+  (header "doku - keep track of your books"
+  <> footer "See the manual for more information.")
+
+subcommands :: Parser (IO Command.Result)
+subcommands = subparser $ mconcat
   [ Command.subcommand Add.command
   , Command.subcommand Init.command
   , Command.subcommand Remove.command
@@ -45,4 +51,4 @@ commands = helper <*> subparser (mconcat
   , Command.subcommand Status.finish
   , Command.subcommand Status.abandon
   , Command.subcommand Status.unread
-  ])
+  ]
