@@ -107,8 +107,9 @@ hasTag _ Nothing = True
 hasTag book (Just tag) = tag `elem` Book.tags book
 
 hasStatus :: Book.Book -> Maybe Status -> Bool
-hasStatus _ Nothing = True
+hasStatus Book.Book {Book.status = Book.Started {}} (Just Started) = True
 hasStatus Book.Book {Book.status = Book.Finished {}} (Just Finished) = True
 hasStatus Book.Book {Book.status = Book.Abandoned {}} (Just Abandoned) = True
 hasStatus Book.Book {Book.status = Book.Unread {}} (Just Unread) = True
+hasStatus _ Nothing = True
 hasStatus _ _ = False
