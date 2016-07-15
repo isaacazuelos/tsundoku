@@ -6,7 +6,7 @@ This document records the justifications for technical decisions made.
 
 I don't really like classifying books beyond fiction–nonfiction.
 
-Tags would be a better solution anyway.
+Tags can do the same thing better anyway.
 
 ## Identifying books by title alone
 
@@ -30,18 +30,19 @@ files, and JSON makes that a little easier.
 
 ### Location
 
-I decided to model a lignin library after a git repository, mostly because its a
+Right now, things are in a hidden file in `$HOME` and there's at most one.
+
+I want to model a pile after a git repository, mostly because its a
 model the average user will be familiar with.
 
 Here are a few other possibilities, and why I don't like them.
 
 #### Hidden folder in `$HOME`
 
-I think it makes sense to have more than one library. That's pretty much it for
-this one.
+I think it makes sense to have more than one library. That's pretty much it
+for this one. That's why this is the current solution, it's easy and it works.
 
 #### Explicit path for every verb
 
 This would get really repetitive. While you could set an alias, I don't think
 expecting people to make the commands better is really the right solutions.
-Sane defaults on the easiest path, etc..
