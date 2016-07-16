@@ -43,6 +43,6 @@ details (Options title) = do
   path <- pilePath
   pile <- readPile path
   case Pile.find title pile of
-    Left Pile.NoSuchBookError -> failWith "could not find the book to remove"
+    Left Pile.NoSuchBookError -> failWith "no book found"
     Left err -> failWith $ "unexpected error: " <> Text.pack (show err)
     Right book -> succeedWith (pretty True book)

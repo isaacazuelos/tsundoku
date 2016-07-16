@@ -15,6 +15,8 @@ This app helps keep your pile manageable.
 - [Introduction](#introduction)
 - [Table of Contents](#table-of-contest)
 - [Examples](#examples)
+    - [First run](#first-run)
+    - [Adding and starting](#adding-and-starting)
 - [Common Issues](#common-issues)
     - Fixing incorrect book details
     - Authors with unusual names
@@ -41,9 +43,60 @@ This app helps keep your pile manageable.
 
 ## Examples
 
-<!-- TODO: write examples-->
+### First run
 
-There aren't any written yet.
+First we need to clone it from github.
+
+``` sh
+example:~$ git clone https://github.com/isaacazuelos/tsundoku
+example:~$ cd ./tsundoku
+```
+
+Now we need to install it with [`stack`][]. Make sure that `stack` puts things
+in your `$PATH`.
+
+``` sh
+example:tsundoku$ stack init
+example:tsundoku$ stack install
+```
+
+Before we can use it, we need to `init` our Tsundoku pile.
+
+``` sh
+example:tsundoku$ doku init
+```
+
+### Adding and starting
+
+Suppose we wanted to add [_A Game of Thrones_][GoT] to our pile. We would do
+this with the `add` command.
+
+[GoT]: https://en.wikipedia.org/wiki/A_Game_of_Thrones
+
+``` sh
+example:tsundoku$ doku add "A Game of Thrones" --firstname "George R.R." --lastname "Martin" --published 1996
+```
+
+We need to mark it as started too. Suppose we started it on February 29th,
+2016.
+
+``` sh
+example:tsundoku$ doku start "A Game of Thrones" --started 2010-04-29
+```
+
+We can confirm it's added with `details` too.
+
+``` sh
+example:tsundoku$ doku details "A Game of Thrones"
+George R.R. Martin - A Game of Thrones (1996) started 2010-04-29
+```
+
+Suppose we wanted to type less, and mark that we have the audiobook version
+and that it's a work of fiction using tags.
+
+``` sh
+example:tsundoku$ doku add "A Game of Thrones" -f "George R.R." -l Martin -p 1996 -t audiobook -t fiction
+```
 
 ## Common Issues
 
