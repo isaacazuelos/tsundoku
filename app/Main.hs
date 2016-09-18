@@ -20,6 +20,7 @@ import qualified Tsundoku.Command.Remove  as Remove (command)
 import qualified Tsundoku.Command.Status  as Status (abandon, finish, start,
                                                      unread)
 import qualified Tsundoku.Command.Tag     as Tag (command)
+import qualified Tsundoku.Command.Bump    as Bump (command)
 
 main :: IO ()
 main = do result <- join $ execParser rootCommand
@@ -51,4 +52,5 @@ subcommands = subparser $ mconcat
   , Command.subcommand Status.finish
   , Command.subcommand Status.abandon
   , Command.subcommand Status.unread
+  , Command.subcommand Bump.command
   ]

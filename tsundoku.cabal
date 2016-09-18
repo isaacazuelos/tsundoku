@@ -1,5 +1,5 @@
 name:                tsundoku
-version:             0.1.0.0
+version:             0.1.1.0
 synopsis:            Tsundoku tracks your piles of unread books.
 description:         Please see README.md
 homepage:            https://github.com/isaacazuelos/tsundoku#readme
@@ -23,6 +23,7 @@ library
                      , Tsundoku.Command.Init
                      , Tsundoku.Command.List
                      , Tsundoku.Command.Add
+                     , Tsundoku.Command.Bump
                      , Tsundoku.Command.Path
                      , Tsundoku.Command.Remove
                      , Tsundoku.Command.Tag

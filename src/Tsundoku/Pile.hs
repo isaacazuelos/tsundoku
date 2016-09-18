@@ -14,6 +14,7 @@ module Tsundoku.Pile
   , delete
   , find
   , list
+  , move
   , PileError (NoSuchBookError, BookNotUniqueError)
   ) where
 
@@ -73,3 +74,22 @@ find title pile@(Pile books) =
     []     -> Left NoSuchBookError
     [book] -> Right book
     _      -> Left BookNotUniqueError
+
+-- | Move a book (by title) into a specified position.
+move :: Book.Title -> Int -> Pile -> Either PileError Pile
+move title pos pile@(Pile books) =
+  case split (`hasTitle` title) books of
+    ([], _)     -> Left NoSuchBookError
+    (_:_:_, _)  -> Left BookNotUniqueError
+    ([book], rem) -> Right . Pile $ before ++ (book : after)
+      where
+        before = take pos rem
+        after = drop pos rem
+
+split :: (a -> Bool) -> [a] -> ([a], [a])
+split pred list = split' pred (reverse list) [] []
+  where
+    split' pred [] t f = (t, f)
+    split' pred (x:xs) t f = case pred x of
+      True  -> split' pred xs (x:t) f
+      False -> split' pred xs t (x:f)

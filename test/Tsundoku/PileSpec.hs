@@ -33,6 +33,8 @@ testBook2 =
     , tags         = []
     }
 
+
+
 spec :: Spec
 spec =
   describe "Pile" $ do
@@ -73,3 +75,16 @@ spec =
       -- it "should BookNotUniqueError if the title matches more than one book"
       -- but you can't create such a store, if `add` is working correctly.
       -- We can't even build a pile to test this.
+    describe "move" $ do
+      let testBook3 = testBook1 { title = "testTitle" }
+      let Right pile1 = Pile.add testBook1 Pile.empty -- [ 1 ]
+      let Right pile2 = Pile.add testBook2 pile1      -- [ 2 1 ]
+      let Right pile3 = Pile.add testBook3 pile2      -- [ 3 2 1 ]
+      let Right pile4 = Pile.add testBook3 pile1      -- [ 3 1 ]
+      let Right pile5 = Pile.add testBook2 pile4      -- [ 2 3 1 ]
+      it "should insert books at the position" $ do
+        Pile.move "testTitle" 0 pile3 `shouldBe` Right pile3
+        Pile.move "testTitle" 1 pile3 `shouldBe` Right pile5
+      it "should notice if there's no such book" $
+        Pile.move "not a book" 0 pile3 `shouldBe` Left Pile.NoSuchBookError
+      

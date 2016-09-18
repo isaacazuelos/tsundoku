@@ -14,7 +14,7 @@ import           System.Directory
 
 import           Tsundoku.IO
 import qualified Tsundoku.Pile       as Pile
-import           Tsundoku.Verb
+import           Tsundoku.Command
 
 -- | The init verb.
 verb =
