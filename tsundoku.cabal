@@ -23,6 +23,7 @@ library
                      , Tsundoku.Command.Init
                      , Tsundoku.Command.List
                      , Tsundoku.Command.Add
+                     , Tsundoku.Command.Bump
                      , Tsundoku.Command.Path
                      , Tsundoku.Command.Remove
                      , Tsundoku.Command.Tag

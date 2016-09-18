@@ -32,6 +32,7 @@ This app helps keep your pile manageable.
         - Browse your books with [`list`](#list)
         - Add new books with [`add`](#add)
         - Remove books with sadness and [`remove`](#remove)
+		- moving books in the pile with [`bump`](#bump)
     - [Working with books](#Working-with-books)
         - Find out more about a book with [`details`](#details)
         - Mark a book you've started with [`start`](#start)
@@ -249,6 +250,18 @@ doku remove TITLE
 ```
 
 Remove a book from your pile forever.
+
+#### `bump`
+
+Usage
+
+``` sh
+doku bump TITLE [-p|--position NUM]
+```
+
+You can bump books around in your pile to the position indicated by
+`--position`. If that argument isn't set then books are bumped to the top of the
+list. This isn't reversable. The top book is in position 1.
 
 ### Working with books
 
