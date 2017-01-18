@@ -53,8 +53,10 @@ example:~$ git clone https://github.com/isaacazuelos/tsundoku
 example:~$ cd ./tsundoku
 ```
 
-Now we need to install it with [`stack`][]. Make sure that `stack` puts things
-in your `$PATH`.
+Now we need to install it with [`stack`][stack]. Make sure that `stack` puts 
+things in your `$PATH`.
+
+[stack]: https://github.com/commercialhaskell/stack
 
 ``` sh
 example:tsundoku$ stack init
