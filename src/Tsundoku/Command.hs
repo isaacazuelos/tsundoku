@@ -8,8 +8,6 @@
 -- Each individual command must export just a single 'Command' record, which
 -- gets built into a subcommand and run to yeild a 'Result'.
 
-{-# LANGUAGE OverloadedStrings #-}
-
 module Tsundoku.Command where
 
 import           Data.Monoid         ((<>))

@@ -27,7 +27,7 @@ command =
     }
 
 -- | Delete's options. See the docs for details.
-data Options = Options { title :: Text.Text } deriving (Show, Eq)
+newtype Options = Options { title :: Text.Text } deriving (Show, Eq)
 
 -- | An applicative parser for our options.
 optionsParser :: Parser Options

@@ -24,7 +24,7 @@ import qualified Tsundoku.Book      as Book
 
 show = pack . Prelude.show
 
-data PrettyOptions
+newtype PrettyOptions
   = PrettyOptions
     { showTags :: Bool }
 
@@ -45,7 +45,7 @@ status b = case Book.status b of
   Book.Unread          -> "unread"
 
 date :: Maybe Calendar.Day -> Text
-date Nothing = ""
+date Nothing  = ""
 date (Just d) = pack (Calendar.showGregorian d)
 
 tags :: Book.Book -> Text
@@ -69,7 +69,7 @@ hyphen = joinWith " - "
 
 prefix :: Text -> Text -> Text
 prefix _ "" = ""
-prefix p s = p <> s
+prefix p s  = p <> s
 
 joinWith :: Text -> Text -> Text -> Text
 joinWith joiner s1 s2

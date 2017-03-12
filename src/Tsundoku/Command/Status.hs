@@ -14,13 +14,13 @@ import qualified Data.Semigroup      as Semi
 import qualified Data.Text           as Text
 import qualified Data.Time.Calendar  as Calendar
 import qualified Data.Time.LocalTime as Time
-import           Options.Applicative hiding (Success, action, header, command)
+import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
 import qualified Tsundoku.Book       as Book
-import           Tsundoku.IO
-import Tsundoku.Pile
 import           Tsundoku.Command
+import           Tsundoku.IO
+import           Tsundoku.Pile
 
 data Date
   = Specifically Calendar.Day
@@ -29,9 +29,9 @@ data Date
   deriving (Show, Eq)
 
 (<!>) :: Maybe Calendar.Day -> Date -> Maybe Calendar.Day
-(<!>) _ None = Nothing
-(<!>) _ (Specifically d)= Just d
-(<!>) d Unspecified = d
+(<!>) _ None             = Nothing
+(<!>) _ (Specifically d) = Just d
+(<!>) d Unspecified      = d
 
 readDate :: String -> ReadM Date
 readDate "none"  = return None
@@ -43,7 +43,7 @@ readDate date@[y1, y2, y3, y4, '-', m1, m2, '-', d1, d2] = do
     month <- int [m1, m2]
     day   <- int [d1, d2]
     case Calendar.fromGregorianValid year month day of
-      Nothing   -> readerError $ date ++ " is not a real date."
+      Nothing  -> readerError $ date ++ " is not a real date."
       Just day -> return (Specifically day)
 readDate _ = readerError "Expecting date format yyyy-mm-dd."
 
@@ -218,7 +218,7 @@ unread = Command
   , action       = unreadAction
   }
 
-data UnreadOptions = UnreadOptions Text.Text deriving (Show, Eq)
+newtype UnreadOptions = UnreadOptions Text.Text deriving (Show, Eq)
 
 unreadParser :: Parser UnreadOptions
 unreadParser = UnreadOptions

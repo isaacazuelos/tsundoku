@@ -4,8 +4,7 @@
 -- License     : MIT License
 -- Maintainer  : Isaac Azuelos
 
-{-# LANGUAGE DeriveGeneric     #-}
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric #-}
 
 module Tsundoku.Book
     ( -- * Book metadata

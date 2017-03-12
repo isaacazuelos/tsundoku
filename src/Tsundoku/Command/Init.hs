@@ -27,7 +27,7 @@ command =
     }
 
 -- | Init's options, which are a single reset flag, as stated in the docs.
-data InitOptions = InitOptions { reset :: Bool } deriving (Show, Eq)
+newtype InitOptions = InitOptions { reset :: Bool } deriving (Show, Eq)
 
 -- | An applicative parser for our options.
 initOptionParser :: Parser InitOptions

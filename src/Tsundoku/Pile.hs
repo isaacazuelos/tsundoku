@@ -5,7 +5,6 @@
 -- Maintainer  : Isaac Azuelos
 
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE OverloadedStrings #-}
 
 module Tsundoku.Pile
   ( Pile
@@ -18,14 +17,14 @@ module Tsundoku.Pile
   , PileError (NoSuchBookError, BookNotUniqueError)
   ) where
 
-import GHC.Generics (Generic)
-import Data.Aeson (FromJSON, ToJSON)
+import           Data.Aeson    (FromJSON, ToJSON)
+import           GHC.Generics  (Generic)
 
 import qualified Tsundoku.Book as Book
 
 -- | Our Pile is just our stack of books, with the most recetnly touched
 -- book on top.
-data Pile = Pile [Book.Book] deriving (Show, Eq, Generic)
+newtype Pile = Pile [Book.Book] deriving (Show, Eq, Generic)
 
 instance FromJSON Pile
 instance ToJSON Pile
@@ -52,14 +51,14 @@ add :: Book.Book -> Pile -> Either PileError Pile
 add book pile@(Pile books) =
   case find (Book.title book) pile of
     Left NoSuchBookError -> Right (Pile (book:books))
-    _ -> Left BookNotUniqueError
+    _                    -> Left BookNotUniqueError
 
 -- | Delete a book from the pile, removing it entierly. This will PileError if
 -- there's no book matching the given title.
 delete :: Book.Title -> Pile -> Either PileError Pile
 delete title pile@(Pile books) =
   case find title pile of
-    Right _ -> Right $ Pile (filter (not . (`hasTitle` title)) books)
+    Right _  -> Right $ Pile (filter (not . (`hasTitle` title)) books)
     Left err -> Left err
 
 -- | Do two books have the same title?
@@ -90,6 +89,7 @@ split :: (a -> Bool) -> [a] -> ([a], [a])
 split pred list = split' pred (reverse list) [] []
   where
     split' pred [] t f = (t, f)
-    split' pred (x:xs) t f = case pred x of
-      True  -> split' pred xs (x:t) f
-      False -> split' pred xs t (x:f)
+    split' pred (x:xs) t f =
+      if pred x
+        then split' pred xs (x : t) f
+        else split' pred xs t (x : f)
