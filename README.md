@@ -2,6 +2,9 @@
 
 Track your books.
 
+[![Build Status](https://travis-ci.org/isaacazuelos/tsundoku.svg?branch=master)](https://travis-ci.org/isaacazuelos/tsundoku)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Tsundoku is used through the `doku` command, which takes a number of
 subcommands like `add` and `list`. See the [manual][] for full instructions.
 
