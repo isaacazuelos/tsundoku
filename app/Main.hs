@@ -2,6 +2,7 @@ module Main where
 
 import           Prelude                  hiding (putStrLn)
 
+import           Data.Monoid              ((<>))
 import           Control.Monad
 import           Data.Text.IO
 import           Options.Applicative

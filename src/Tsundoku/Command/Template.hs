@@ -6,8 +6,9 @@
 
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tsundoku.Verb.Template (verb) where
+module Tsundoku.Command.Template (verb) where
 
+import           Data.Monoid         ((<>))
 import qualified Data.Text           as Text
 import           Options.Applicative hiding (Success, action, header)
 import           System.Directory
@@ -18,7 +19,7 @@ import           Tsundoku.Command
 
 -- | The init verb.
 verb =
-  Verb
+  Command
     { name         = "template"
     , header       = "tsundoku init - does nothing"
     , description  = "do nothing"

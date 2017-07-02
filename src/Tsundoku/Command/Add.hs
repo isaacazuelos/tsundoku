@@ -13,6 +13,7 @@ import           Prelude             hiding (last)
 import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory
 
+import           Data.Monoid         ((<>))
 import qualified Data.Char           as Char (isDigit)
 import qualified Data.Text           as Text
 import qualified Data.Time.Calendar  as Calendar

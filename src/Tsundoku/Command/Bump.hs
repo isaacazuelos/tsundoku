@@ -8,6 +8,7 @@
 
 module Tsundoku.Command.Bump (command) where
 
+import           Data.Monoid         ((<>))
 import qualified Data.Text           as Text
 import           Options.Applicative hiding (Success, action, header, command)
 import           System.Directory

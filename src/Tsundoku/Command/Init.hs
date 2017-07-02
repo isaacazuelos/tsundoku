@@ -8,6 +8,7 @@
 
 module Tsundoku.Command.Init (command) where
 
+import           Data.Monoid         ((<>))
 import qualified Data.Text           as Text
 import           Options.Applicative hiding (Success, action, command, header)
 import           System.Directory

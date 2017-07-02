@@ -8,6 +8,7 @@
 
 module Tsundoku.Command.Status ( start, finish, abandon, unread ) where
 
+import           Data.Monoid         ((<>))
 import qualified Data.Char           as Char (isDigit)
 import           Data.Maybe          (fromMaybe, isJust)
 import qualified Data.Semigroup      as Semi

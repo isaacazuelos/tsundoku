@@ -11,6 +11,7 @@ module Tsundoku.Command.List (command) where
 import           Prelude             hiding (show)
 import qualified Prelude             (show)
 
+import           Data.Monoid         ((<>))
 import           Data.List           (intercalate, sortBy)
 import           Data.Ord            (comparing)
 import qualified Data.Text           as Text

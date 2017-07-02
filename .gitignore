@@ -1,3 +1,6 @@
+# use hpack
+tsundoku.cabal
+
 dist
 dist-*
 cabal-dev
