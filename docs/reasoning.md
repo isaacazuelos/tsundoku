@@ -32,15 +32,13 @@ files, and JSON makes that a little easier.
 
 Right now, things are in a hidden file in `$HOME` and there's at most one.
 
-I want to model a pile after a git repository, mostly because its a
-model the average user will be familiar with.
-
 Here are a few other possibilities, and why I don't like them.
 
 #### Hidden folder in `$HOME`
 
-I think it makes sense to have more than one library. That's pretty much it
-for this one. That's why this is the current solution, it's easy and it works.
+I think it makes sense to have more than one library. I'd want to model these
+libraries after git repositories, mostly because its a model the average user
+will be familiar with.
 
 #### Explicit path for every verb
 
