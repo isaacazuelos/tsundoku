@@ -18,6 +18,16 @@ Installation and development is handled by [`stack`][stack].
 [stack]: https://github.com/commercialhaskell/stack
 [firstrun]: https://github.com/isaacazuelos/tsundoku/blob/master/docs/manual.md#first-run
 
+I've built things on NixOS before, here's how.
+
+```sh
+# build a default.nix file based on the cabal manifest
+nix-shell -p cabal2nix --run "cabal2nix ." > default.nix
+nix-env -i -f release.nix
+```
+
+I'm still leanring nix, so this could be bad.
+
 ## License
 
 It's [MIT][] Licensed. See the included `LICENSE` file.
